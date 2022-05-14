@@ -12,6 +12,10 @@
 
 @layer components {
   .hoverAnimation {
-    @apply cursor-pointer rounded-full transition-all duration-300 ease-in-out hover:bg-[#d9d9d9] hover:bg-opacity-10;
+    @apply cursor-pointer rounded-full p-3 transition-all duration-300 ease-in-out hover:bg-[#d9d9d9] hover:bg-opacity-20;
+  }
+
+  .icon {
+    @apply cursor-pointer text-yellow-600 transition-all duration-300 ease-in-out hover:text-yellow-500;
   }
 }
