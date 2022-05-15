@@ -12,8 +12,13 @@ import {
   HomeIcon,
   DotsHorizontalIcon,
 } from '@heroicons/react/outline'
+import { useSession } from 'next-auth/react'
 
 const Sidebar = () => {
+  const { data: session } = useSession()
+
+  console.log(session)
+
   return (
     <div className="fixed flex h-full w-[88px] flex-col p-3 lg:w-[275px] ">
       <div className="hoverAnimation flex items-center justify-center">
@@ -34,13 +39,13 @@ const Sidebar = () => {
       </button>
       <div className="hoverAnimation mt-auto flex w-full items-center lg:px-4">
         <img
-          src="https://i.kym-cdn.com/photos/images/facebook/001/885/161/8fa.jpg"
+          src={session?.user.image}
           alt=""
           className="mx-auto h-10 w-10 rounded-full lg:mx-0 "
         />
         <div className="hidden leading-5 md:ml-4 lg:inline">
-          <h4 className="font-bold">moledart</h4>
-          <p className="text-neutral-500">@moledart</p>
+          <h4 className="font-bold">{session?.user.name}</h4>
+          <p className="text-neutral-500">@{session?.user.tag}</p>
         </div>
         <DotsHorizontalIcon className="hidden h-5 md:ml-auto lg:inline-flex" />
       </div>
