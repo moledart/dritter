@@ -11,13 +11,12 @@ import {
   UserIcon,
   HomeIcon,
   DotsHorizontalIcon,
+  LogoutIcon,
 } from '@heroicons/react/outline'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 const Sidebar = () => {
   const { data: session } = useSession()
-
-  console.log(session)
 
   return (
     <div className="fixed flex h-full w-[88px] flex-col p-3 lg:w-[275px] ">
@@ -37,7 +36,10 @@ const Sidebar = () => {
       <button className="mt-4 hidden w-full rounded-full bg-yellow-600 py-3 text-lg font-bold text-white hover:bg-yellow-700 lg:inline">
         Tweet
       </button>
-      <div className="hoverAnimation mt-auto flex w-full items-center lg:px-4">
+      <div
+        className="hoverAnimation mt-auto flex w-full items-center lg:px-4"
+        onClick={() => signOut()}
+      >
         <img
           src={session?.user.image}
           alt=""
@@ -47,7 +49,7 @@ const Sidebar = () => {
           <h4 className="font-bold">{session?.user.name}</h4>
           <p className="text-neutral-500">@{session?.user.tag}</p>
         </div>
-        <DotsHorizontalIcon className="hidden h-5 md:ml-auto lg:inline-flex" />
+        <LogoutIcon className="hidden h-5 md:ml-auto lg:inline-flex" />
       </div>
     </div>
   )

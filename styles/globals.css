@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-black font-mono text-white;
+    @apply bg-black font-mono text-neutral-300;
   }
 }
 

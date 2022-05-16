@@ -7,6 +7,7 @@ import {
   PhotographIcon,
   XIcon,
 } from '@heroicons/react/outline'
+import { useSession } from 'next-auth/react'
 
 import { db, storage } from '../firebase'
 import {
@@ -25,14 +26,16 @@ const Input = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const filePickerRef = useRef<HTMLInputElement>(null)
 
+  const { data: session } = useSession()
+
   const sendPost = async () => {
     if (loading) return
     setLoading(true)
     const docRef = await addDoc(collection(db, 'tweets'), {
-      // id: session.user.uid,
-      // username: session.user.name,
-      // userImg: session.user.image,
-      // tag: session.user.tag,
+      id: session?.user.uid,
+      username: session?.user.name,
+      userImg: session?.user.image,
+      tag: session?.user.tag,
       text: input,
       timestamp: serverTimestamp(),
     })
@@ -73,7 +76,7 @@ const Input = () => {
       }`}
     >
       <img
-        src="https://i.kym-cdn.com/photos/images/facebook/001/885/161/8fa.jpg"
+        src={session?.user.image}
         alt=""
         className="h-10 w-10 cursor-pointer rounded-full"
       />
