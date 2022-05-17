@@ -76,7 +76,7 @@ const Input = () => {
       }`}
     >
       <img
-        src={session?.user.image}
+        src={session?.user?.image}
         alt=""
         className="h-10 w-10 cursor-pointer rounded-full"
       />

@@ -3,6 +3,7 @@ export interface TTweet {
   tag: string
   text: string
   id: string
+  uid: string
   timestamp: any
   userImg?: string
   image?: string

@@ -15,19 +15,13 @@ import Tweet from './Tweet'
 import { TTweet } from '../types/tweet'
 
 const Feed = () => {
-  const [tweets, setTweets] = useState<TTweet[]>([])
+  const [tweets, setTweets] = useState([])
 
   useEffect(
     () =>
       onSnapshot(
         query(collection(db, 'tweets'), orderBy('timestamp', 'desc')),
-        (snapshot: any) => {
-          const tweets: any = []
-          snapshot.forEach((tweet: any) => {
-            tweets.push(tweet.data())
-          })
-          setTweets(tweets)
-        }
+        (snapshot: any) => setTweets(snapshot.docs)
       ),
 
     [db]
@@ -43,8 +37,8 @@ const Feed = () => {
       </div>
       <Input />
       <div className="pb-72 ">
-        {tweets.map((tweet: TTweet) => (
-          <Tweet key={Number(tweet.timestamp)} {...tweet} />
+        {tweets.map((tweet: any) => (
+          <Tweet key={tweet.id} {...tweet.data()} uid={tweet.id} />
         ))}
       </div>
     </div>
